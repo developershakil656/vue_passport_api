@@ -1,6 +1,7 @@
 <template>
   <div class="container py-5">
     <div>
+      <p>loggin out</p>
     </div>
   </div>
 </template>
@@ -9,9 +10,10 @@
 // @ is an alias to /src
 
 export default {
-  name: "C-login",
+  name: "C-logout",
   created(){
     this.$store.dispatch('CLogout').then(()=>{
+        toastr.success('logout success.')
         this.$router.push({
           name: 'CLogin'
         })

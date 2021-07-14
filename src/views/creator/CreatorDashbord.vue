@@ -11,34 +11,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+        <tr v-for="(post,index) in posts" :key="post.title">
+          <th scope="row">{{++index}}</th>
+          <td><img :src="post.image" style="width:150px"></td>
+          <td>{{post.title}}</td>
+          <td>{{post.content}}</td>
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        
       </tbody>
     </table>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import HomeLayout from '../../layouts/HomeLayout'
 export default {
-  name: "Creator-Dashbord",
-  components: {
+  name: "dashbord",
+  created(){
+    this.$emit('update:layout',HomeLayout)
   },
-};
+  mounted(){
+    this.$store.dispatch("allPosts");
+  },
+  computed:{
+    posts(){
+      return this.$store.getters.allPosts
+    }
+  }
+}
 </script>

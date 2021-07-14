@@ -1,16 +1,17 @@
 <template>
-  <div>
-    <MyNav/>
-    <router-view />
-  </div>
+  <v-app>
+    <component :is="layout">
+    <router-view v-model:layout.sync="layout"/>
+    </component>
+  </v-app>
 </template>
 
 <script>
-import MyNav from './components/MyNav.vue'
 export default {
-  components:{
-    MyNav,
+  data(){
+    return{
+      layout:`div`,
+    }
   }
 }
 </script>
-

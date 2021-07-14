@@ -1,6 +1,9 @@
 <template>
       <div class="col-md-6 mx-auto">
         <div class="card">
+            <div class="card-header">
+                <h4>Admin Login</h4>
+            </div>
           <div class="card-body">
             <form @submit.prevent="login">
               <div class="mb-3">
@@ -25,28 +28,29 @@
 // @ is an alias to /src
 import FormLayout from "../../layouts/FormLayout.vue";
 export default {
-  name: "C-login",
+  name: "A-login",
   created(){
     this.$emit('update:layout',FormLayout)
   },
   data(){
     return{
       credentials:{
-        email:'creator@gmail.com',
+        email:'admin@gmail.com',
         password:'password'
       }
     }
   },
   methods:{
     login(){
-      this.$store.dispatch('login',this.credentials).then(()=>{
-        toastr.success("welcome back!");
+      this.$store.dispatch('adminLogin',this.credentials).then(()=>{
+        toastr.success("welcome to admin panel!");
         this.$router.push({
-          name: 'Home'
+          name: 'ADashbord'
         })
       }).catch(error=>{
         toastr.info(error)
       });
+
     }
   }
 };

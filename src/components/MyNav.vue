@@ -22,10 +22,11 @@
               <router-link class="nav-link active" aria-current="page" to="/"
                 >Home</router-link
               >
+              <router-link class="nav-link" to="/About">About</router-link>
               <router-link class="nav-link" :to="{name:'CLogin'}" v-if="!CLogedIn">Login</router-link>
               <router-link class="nav-link" :to="{name:'CDashbord'}" v-if="CLogedIn">Dashbord</router-link>
               <router-link class="nav-link" :to="{name:'CLogout'}" v-if="CLogedIn">Logout</router-link>
-              <router-link class="nav-link" to="/About">About</router-link>
+              <router-link class="nav-link" :to="{name:'ALogin'}">Admin</router-link>
             </div>
           </div>
         </div>

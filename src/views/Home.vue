@@ -2,79 +2,38 @@
   <div class="container">
     <h1>home</h1>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3" v-for="post in posts" :key="post.title">
       <div class="card" style="width: 18rem;">
-        <img src="" class="card-img-top" alt="">
+        <img :src="post.image" class="card-img-top" alt="">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h5 class="card-title">{{post.title}}</h5>
+          <p class="card-text">{{post.content}}</p>
         </div>
       </div>
+     
       </div>
-      <div class="col-md-3">
-      <div class="card" style="width: 18rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-      </div>
-      <div class="col-md-3">
-      <div class="card" style="width: 18rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-      </div>
-      <div class="col-md-3">
-      <div class="card" style="width: 18rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-      </div>
-      <div class="col-md-3">
-      <div class="card" style="width: 18rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-      </div>
-      <div class="col-md-3">
-      <div class="card" style="width: 18rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-      </div>
-      <div class="col-md-3">
-      <div class="card" style="width: 18rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-      </div>
-      </div>
+     
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import HomeLayout from '../layouts/HomeLayout'
 export default {
   name: "Home",
-  components: {
+  created(){
+    this.$emit('update:layout',HomeLayout)
   },
-};
+  mounted(){
+    this.$store.dispatch("activePosts");
+    
+  },
+  computed:{
+    posts(){
+      return this.$store.getters.posts;
+    }
+  }
+}
+
+
 </script>

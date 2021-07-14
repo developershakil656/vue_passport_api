@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import store from "../store";
 import Home from "../views/Home.vue";
 
+import ALogin from "../views/admin/ALogin.vue";
 import AdminDashbord from "../views/admin/AdminDashbord.vue";
 
 import CreatorDashbord from "../views/creator/CreatorDashbord.vue";
@@ -24,6 +25,17 @@ const routes = [
     path: "/admin/dashbord",
     name: "ADashbord",
     component: AdminDashbord,
+    meta:{
+      requireAdmin:true
+    }
+  },
+  {
+    path: "/admin/login",
+    name: "ALogin",
+    component: ALogin,
+    meta:{
+      Avisitor:true
+    }
   },
   {
     path: "/creator/dashbord",
@@ -67,12 +79,34 @@ router.beforeEach((to, from, next) => {
       next()
     }
   }
+  else if (to.matched.some(record => record.meta.requireAdmin)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (!store.getters.ALogedIn) {
+      next({
+        name: 'ALogin'
+      })
+    } else {
+      next()
+    }
+  }
   else if (to.matched.some(record => record.meta.visitor)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
     if (store.getters.CLogedIn) {
       next({
         name: 'CDashbord'
+      })
+    } else {
+      next()
+    }
+  } 
+  else if (to.matched.some(record => record.meta.Avisitor)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (store.getters.ALogedIn) {
+      next({
+        name: 'ADashbord'
       })
     } else {
       next()
